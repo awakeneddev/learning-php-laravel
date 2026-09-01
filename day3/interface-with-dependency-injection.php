@@ -50,6 +50,9 @@ function getSmsProvider(string $providerName):SmsProvider {
     };
 }
 // Now we switch different provider with just getSmsProvider
-$provider = getSmsProvider("click-send");
-$service = new CampaignService($provider);
-$service->sendCampaignMessage("Hello from User 1","98XXXXXXXX");
+/* $provider = getSmsProvider("click-send"); */
+/* $service = new CampaignService($provider); */
+/* $service->sendCampaignMessage("Hello from User 1","98XXXXXXXX"); */
+
+$clickSend = new ClickSendProvider();
+$clickSend->sendMessage("Be careful GENg","GEng");
