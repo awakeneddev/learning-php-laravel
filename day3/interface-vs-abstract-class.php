@@ -16,7 +16,7 @@ abstract class BaseEmailProvider implements EmailProvider
 		protected string $apiKey
 	) {}
 
-	public function log(string $message)
+	public function log(string $message):void
 	{
 		echo "[{$this->emailProviderName}]" . "------> " . $message;
 	}
