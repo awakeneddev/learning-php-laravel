@@ -21,7 +21,7 @@ interface CampaignServiceI
 class NewCampaignService implements CampaignServiceI
 {
 
-	use HasTimeStamp;
+	use HasTimestamp;
 
 	public static array $campaignIds = [];
 	public static int $campaignCount = 0;
