@@ -13,8 +13,8 @@ interface CampaignServiceI
 	/**
 	 * @param string[] $contacts
 	 */
-	public function createCampaign(string $name, array $contacts, string $createdAt): bool;
-	public function cancelCampaign(int $campaignId, string $cancelledAt): bool;
+	public function createCampaign(string $name, array $contacts): bool;
+	public function cancelCampaign(int $campaignId): bool;
 	public function findCampaign(int $id): bool;
 }
 
@@ -27,7 +27,7 @@ class NewCampaignService implements CampaignServiceI
 	public static int $campaignCount = 0;
 
 
-	public function createCampaign(string $name, array $contacts, string $createdAt): bool
+	public function createCampaign(string $name, array $contacts ): bool
 	{
 		if ($name === "") {
 			throw new Exception("Campaign name cannot be empty");
@@ -37,7 +37,7 @@ class NewCampaignService implements CampaignServiceI
 		}
 		self::$campaignCount++;
 		self::$campaignIds[] = self::$campaignCount;
-		echo "Campaign created at : " . $createdAt . PHP_EOL;
+		echo "Campaign created at : " . $this->getCurrentTime() . PHP_EOL;
 		return true;
 	}
 
@@ -49,28 +49,28 @@ class NewCampaignService implements CampaignServiceI
 		return true;
 	}
 
-	public function cancelCampaign(int $campaignId, string $cancelledAt): bool
+	public function cancelCampaign(int $campaignId): bool
 	{
 		if (!$this->findCampaign($campaignId)) {
 
 			return throw new Exception("Cannot cancel campaign which does not exist.");
 		}
 
-		echo "Campaign cancelled at : " . $cancelledAt . PHP_EOL;
+		echo "Campaign cancelled at : " . $this->getCurrentTime() . PHP_EOL;
 		return true;
 	}
 }
 
 $smsCampaign = new NewCampaignService();
-$smsCampaign->createCampaign("SMS Campaign", ["98081193670"], $smsCampaign->getCurrentTime());
+$smsCampaign->createCampaign("SMS Campaign", ["98081193670"]);
 
 $notificationCampaign = new NewCampaignService();
-$notificationCampaign->createCampaign("SMS Campaign", ["98081193670"], $notificationCampaign->getCurrentTime());
+$notificationCampaign->createCampaign("SMS Campaign", ["98081193670"]);
 
 
 
 echo "The Campaigns are: " . implode(', ', NewCampaignService::$campaignIds) . PHP_EOL;
 echo NewCampaignService::$campaignCount . PHP_EOL;
 
-$smsCampaign->cancelCampaign(1, $smsCampaign->getCurrentTime());
-$notificationCampaign->cancelCampaign(2, $notificationCampaign->getCurrentTime());
+$smsCampaign->cancelCampaign(1);
+$notificationCampaign->cancelCampaign(2);
