@@ -16,7 +16,7 @@ class ContactController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Contact list fetched successfully.',
-            $contacts
+            'data' => $contacts
         ]);
     }
     public function store(StoreContactRequest $request)

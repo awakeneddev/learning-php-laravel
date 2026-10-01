@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Campaign extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
         'description',
         'status'
     ];
+
+    public function contacts()
+    {
+        return $this->belongsToMany(Contact::class);
+    }
 }

@@ -11,6 +11,14 @@ class Contact extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name','phone', 'email','status'
+        'name',
+        'phone',
+        'email',
+        'status'
     ];
+
+    public function campaigns()
+    {
+        return $this->belongsToMany(Campaign::class);
+    }
 }
